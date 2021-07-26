@@ -81,7 +81,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 //custom commands
 static const char *open_notes[] = { "sh","open_notes.sh","&","disown",";","exit", NULL };
 static const char *open_ranger[] = { TERMINAL,"open_cfiles.sh", NULL };
-static const char *open_brave[] = { "brave", NULL };
+static const char *open_qbrowser[] = { "qutebrowser", NULL };
 static const char *open_nvim[] = { "sh","open_nvim.sh", NULL };
 static const char *play_music[] = { "sh","open_music.sh", NULL };
 static const char *print_screen[] = { "sh","printscreen.sh", NULL };
@@ -100,7 +100,7 @@ static Key keys[] = {
 	{0,		   XK_Print,                spawn,          {.v = print_screen } },
 
 	//execute personal scripts
-	{Mod1Mask,         XK_1,                    spawn,          {.v = open_brave } },
+	{Mod1Mask,         XK_1,                    spawn,          {.v = open_qbrowser } },
 	{Mod1Mask,         XK_2,                    spawn,          {.v = open_nvim} },
 	{Mod1Mask,         XK_3,                    spawn,          {.v = open_ranger } },
 	{Mod1Mask,         XK_4,                    spawn,          {.v = play_music } },
