@@ -7,7 +7,7 @@ static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=12","JoyPixels:pixelsize=12" };
+static const char *fonts[]          = { "monospace:size=10","JoyPixels:pixelsize=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -79,9 +79,10 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 //custom commands
+static const char *open_password_manager[] = { "passmenu", NULL };
 static const char *open_notes[] = { "sh","open_notes.sh","&","disown",";","exit", NULL };
 static const char *open_ranger[] = { TERMINAL,"open_cfiles.sh", NULL };
-static const char *open_brave[] = { "brave", NULL };
+static const char *open_qbrowser[] = { "qutebrowser", NULL };
 static const char *open_nvim[] = { "sh","open_nvim.sh", NULL };
 static const char *play_music[] = { "sh","open_music.sh", NULL };
 static const char *print_screen[] = { "sh","printscreen.sh", NULL };
@@ -96,11 +97,13 @@ static Key keys[] = {
 	{MODKEY,           XK_n,                    spawn,          {.v = open_notes } },
 	{MODKEY,           XK_v,                    spawn,          {.v = show_clipboard } },
 	{MODKEY,           XK_space,                spawn,          {.v = change_keyboard_layout } },
+	{MODKEY|ShiftMask, XK_p,                    spawn,          {.v = open_password_manager } },
+
 	//print screen
 	{0,		   XK_Print,                spawn,          {.v = print_screen } },
 
 	//execute personal scripts
-	{Mod1Mask,         XK_1,                    spawn,          {.v = open_brave } },
+	{Mod1Mask,         XK_1,                    spawn,          {.v = open_qbrowser } },
 	{Mod1Mask,         XK_2,                    spawn,          {.v = open_nvim} },
 	{Mod1Mask,         XK_3,                    spawn,          {.v = open_ranger } },
 	{Mod1Mask,         XK_4,                    spawn,          {.v = play_music } },
@@ -182,9 +185,7 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
-	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
-	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
+	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
