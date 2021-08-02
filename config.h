@@ -79,7 +79,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 //custom commands
-static const char *open_password_manager[] = { "passmenu", NULL };
+static const char *open_password_manager[] = { "open_passmenu", NULL };
 static const char *open_notes[] = { "sh","open_notes.sh","&","disown",";","exit", NULL };
 static const char *open_ranger[] = { TERMINAL,"open_cfiles.sh", NULL };
 static const char *open_qbrowser[] = { "qutebrowser", NULL };
