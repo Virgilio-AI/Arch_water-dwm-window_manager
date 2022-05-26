@@ -79,9 +79,11 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 //custom commands
-static const char *open_password_manager[] = { "open_passmenu", NULL };
-static const char *open_notes[] = { "sh","open_notes.sh","&","disown",";","exit", NULL };
-static const char *open_ranger[] = { TERMINAL,"open_cfiles.sh", NULL };
+static const char *shutdown_menu[] = { "sh","runShutdownMenu", NULL };
+//static const char *shutdown_now[] = { "shutdown","now", NULL };
+static const char *open_password_manager[] = { "open_pass", NULL };
+static const char *open_notes[] = { "open_notes", NULL };
+static const char *open_ranger[] = { TERMINAL,"open_ranger.sh", NULL };
 static const char *open_qbrowser[] = { "qutebrowser", NULL };
 static const char *open_nvim[] = { "sh","open_nvim.sh", NULL };
 static const char *play_music[] = { "sh","open_music.sh", NULL };
@@ -94,19 +96,43 @@ static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{MODKEY,           XK_n,                    spawn,          {.v = open_notes } },
-	{MODKEY,           XK_v,                    spawn,          {.v = show_clipboard } },
-	{MODKEY,           XK_space,                spawn,          {.v = change_keyboard_layout } },
-	{MODKEY|ShiftMask, XK_p,                    spawn,          {.v = open_password_manager } },
+	{MODKEY,           XK_n,     spawn, {.v = open_notes             } },
+	{MODKEY,           XK_v,     spawn, {.v = show_clipboard         } },
+	{MODKEY,           XK_space, spawn, {.v = change_keyboard_layout } },
+	{MODKEY|ShiftMask, XK_p,     spawn, {.v = open_password_manager  } },
+	{0          ,XK_F4,     spawn, {.v = shutdown_menu          } },
+	//{Mod1Mask|ShiftMask,XK_F4,     spawn, {.v = shutdown_now           } },
+
+	// turn of computer
+	
 
 	//print screen
-	{0,		   XK_Print,                spawn,          {.v = print_screen } },
+	{0,                  XK_Print, spawn, {.v = print_screen } },
+	{MODKEY|ControlMask, XK_p,     spawn, {.v = print_screen } },
 
 	//execute personal scripts
 	{Mod1Mask,         XK_1,                    spawn,          {.v = open_qbrowser } },
 	{Mod1Mask,         XK_2,                    spawn,          {.v = open_nvim} },
 	{Mod1Mask,         XK_3,                    spawn,          {.v = open_ranger } },
 	{Mod1Mask,         XK_4,                    spawn,          {.v = play_music } },
+
+//	// for spanish characters
+//	{XK_Shift_R,      XK_a, spawn, SHCMD("xdotool type á")},
+//	{XK_Shift_R,      XK_e, spawn, SHCMD("xdotool type é")},
+//	{XK_Shift_R,      XK_i, spawn, SHCMD("xdotool type í")},
+//	{XK_Shift_R,      XK_o, spawn, SHCMD("xdotool type ó")},
+//	{XK_Shift_R,      XK_u, spawn, SHCMD("xdotool type ú")},
+//	{XK_Shift_R,      XK_n, spawn, SHCMD("xdotool type ñ")},
+//	//mayusculas
+//	{XK_Shift_R,      XK_A, spawn, SHCMD("xdotool type Á")},
+//	{XK_Shift_R,      XK_E, spawn, SHCMD("xdotool type É")},
+//	{XK_Shift_R,      XK_I, spawn, SHCMD("xdotool type Í")},
+//	{XK_Shift_R,      XK_O, spawn, SHCMD("xdotool type Ó")},
+//	{XK_Shift_R,      XK_U, spawn, SHCMD("xdotool type Ú")},
+//	{XK_Shift_R,      XK_A, spawn, SHCMD("xdotool type Ñ")},
+//	// spanish signs
+//	{XK_Shift_R,      XK_1, spawn, SHCMD("xdotool type ¡")},
+//	{XK_Shift_R,      XK_slash, spawn, SHCMD("xdotool type ¿")},
 	
 	//default dwm definitions for window managing
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -145,7 +171,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_6,                      5)
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
-//	TAGKEYS(                        XK_9,                      8)
+	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	//default keys for media management
 		{ 0, XF86XK_AudioMute,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
