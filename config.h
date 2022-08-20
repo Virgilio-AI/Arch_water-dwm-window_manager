@@ -92,7 +92,7 @@ static const char *show_clipboard[] =  {"sh","show_clipboard.sh", NULL  };
 static const char *change_keyboard_layout[] =  {TERMINAL,"-T","\"floating\"","-g","=75x45+550+100","-e","sh","-c","\"keyboardConfiguration\"",NULL };
 static const char *FloatTerminal[] =  {TERMINAL,"FloatTerminal", NULL };
 
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "open_terminal", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
